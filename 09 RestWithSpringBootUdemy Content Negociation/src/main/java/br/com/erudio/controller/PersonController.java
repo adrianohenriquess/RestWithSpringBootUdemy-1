@@ -1,5 +1,8 @@
 package br.com.erudio.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
 import br.com.erudio.data.vo.v1.PersonVO;
 import br.com.erudio.services.PersonServices;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-
+//@CrossOrigin
 @Api(tags = "PersonEndpoint")
 @RestController
 @RequestMapping("/api/person/v1")
@@ -26,7 +29,8 @@ public class PersonController {
 	
 	@Autowired
 	private PersonServices service;
-	
+
+	//@CrossOrigin(origins = "http://localhost:8080")
 	@ApiOperation("Find All People")
 	@GetMapping(produces = { "application/json", "application/xml", "application/x-yaml" })
 	public List<PersonVO> findAll() {
@@ -35,6 +39,7 @@ public class PersonController {
 		return list;
 	}	
 	
+	//@CrossOrigin(origins = {"http://localhost:8080", "www.erudio.com.br"})
 	@ApiOperation("Find Person by id")
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml", "application/x-yaml" })
 	public PersonVO findById(@PathVariable("id") Long id) {
